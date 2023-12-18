@@ -1,0 +1,14 @@
+<turbo-frame id="turbo-shopping-item-index" >   
+    <h1 class="font-bold text-xl">List of items of the list <%= @shopping_list.title %></h1>
+    <div class="mt-8">
+        <%= form_for(@shopping_list, class: "mb-7", data: { controller: :form, action: "turbo:submit-end->form#clear" }) do |form| %>
+            <div class="mb-5">
+                <%= form.fields_for :shopping_items, ShoppingItem.new  do |shopping_item| %>
+                    <%= shopping_item.text_field :title, placeholder: "Create new item", class: "placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 px-2 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" %>
+                <% end %>
+                <%= form.submit "Add a new item",  data: { turbo_submits_with: " Creating new item..." }, class: "bg-sky-500 hover:bg-sky-600 active:bg-sky-700 focus:outline-none focus:ring focus:ring-sky-300 rounded-md py-2 px-9 mt-8" %>
+            </div>
+        <% end %>
+    </div>
+    <%= render @shopping_list.shopping_items %>
+</turbo-frame>

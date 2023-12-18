@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :shopping_items
-  resources :shopping_lists
   root "shopping_lists#index"
+  resources :shopping_lists do
+    member do
+      resources :shopping_items 
+    end
+  end
 end
+
