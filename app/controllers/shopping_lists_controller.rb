@@ -8,7 +8,8 @@ class ShoppingListsController < ApplicationController
         @shopping_list = ShoppingList.new(shopping_list_params)
         respond_to do |format|
             if @shopping_list.save
-                format.html { redirect_to shopping_lists_url }
+                @shopping_lists = ShoppingList.all
+                format.html { render :show_shopping_list, layout: false }
             else
                 format.html { render :new, status: :unprocessable_entity }
             end
